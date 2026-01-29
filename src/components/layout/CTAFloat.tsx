@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Mail, X, Phone } from 'lucide-react';
+import { MessageCircle, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CTAFloat: React.FC = () => {
@@ -54,7 +54,6 @@ const CTAFloat: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 p-3 bg-green-50 hover:bg-green-100 rounded-xl transition-colors group"
                 onClick={() => {
-                  // GTM tracking
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
                     (window as any).dataLayer.push({
                       event: 'cta_click',
@@ -68,31 +67,8 @@ const CTAFloat: React.FC = () => {
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="font-medium text-neutral-900">WhatsApp</p>
-                  <p className="text-sm text-neutral-600">Respon dalam 5 menit</p>
-                </div>
-              </a>
-
-              <a
-                href={`mailto:${email}?subject=Konsultasi Desain Rumah&body=Halo Arsiteku,%0D%0A%0D%0ASaya tertarik untuk konsultasi tentang:%0D%0A- Tipe bangunan:%0D%0A- Lokasi:%0D%0A- Luas bangunan:%0D%0A- Budget estimasi:%0D%0A%0D%0ATerima kasih.`}
-                className="flex items-center space-x-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors group"
-                onClick={() => {
-                  // GTM tracking
-                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                    (window as any).dataLayer.push({
-                      event: 'cta_click',
-                      cta_type: 'email_float',
-                      cta_location: 'floating_widget'
-                    });
-                  }
-                }}
-              >
-                <div className="w-10 h-10 bg-blue-500 text-white rounded-xl flex items-center justify-center group-hover:bg-blue-600 transition-colors">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-medium text-neutral-900">Email</p>
-                  <p className="text-sm text-neutral-600">Brief lengkap project</p>
+                  <p className="font-medium text-neutral-900">Chat WhatsApp</p>
+                  <p className="text-sm text-neutral-600">Konsultasi Personal</p>
                 </div>
               </a>
             </div>
@@ -103,11 +79,10 @@ const CTAFloat: React.FC = () => {
       {/* Main Button */}
       <motion.button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
-          isExpanded 
-            ? 'bg-neutral-600 hover:bg-neutral-700' 
-            : 'bg-accent hover:bg-accent/90'
-        }`}
+        className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${isExpanded
+          ? 'bg-neutral-600 hover:bg-neutral-700'
+          : 'bg-accent hover:bg-accent/90'
+          }`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ scale: 0 }}

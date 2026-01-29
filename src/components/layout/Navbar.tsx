@@ -21,13 +21,17 @@ const Navbar: React.FC = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Determine if we should show the solid navbar (white bg)
+  // Show if: Scrolled OR Not on Homepage
+  const showSolidNav = isScrolled || location.pathname !== '/';
+
   const navLinks = [
-    { to: '/', label: 'Beranda' },
+    { to: '/', label: 'Home' },
+    { to: '/portofolio', label: 'Portfolio' },
     { to: '/layanan', label: 'Layanan' },
-    { to: '/portofolio', label: 'Portofolio' },
-    { to: '/tentang', label: 'Tentang' },
-    { to: '/artikel', label: 'Artikel' },
-    { to: '/faq', label: 'FAQ' },
+    { to: '/proses', label: 'Proses' },
+    { to: '/tentang', label: 'Tentang Studio' },
+    { to: '/tim', label: 'Tim' },
     { to: '/kontak', label: 'Kontak' },
   ];
 
@@ -35,42 +39,24 @@ const Navbar: React.FC = () => {
   const whatsappMessage = "Halo Arsiteku, saya tertarik untuk konsultasi desain rumah.";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-        : 'bg-transparent'
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${showSolidNav
+      ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-neutral-100'
+      : 'bg-transparent'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors">
-              <div className="w-6 h-6 relative">
-                {/* Simple house-like A logo */}
-                <div className="absolute inset-0">
-                  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-white">
-                    <path 
-                      d="M12 2L2 7v10c0 5.55 3.84 10 9 10s9-4.45 9-10V7l-8-5z" 
-                      fill="currentColor"
-                    />
-                    <path 
-                      d="M12 2v15M8 12h8" 
-                      stroke="rgba(255,255,255,0.3)" 
-                      strokeWidth="1"
-                    />
-                  </svg>
-                </div>
-              </div>
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+              <img src="/images/logo.png" alt="Arsiteku Logo" className="w-full h-full object-cover" />
             </div>
             <div className="hidden sm:block">
-              <h1 className={`text-xl font-heading font-bold transition-colors ${
-                isScrolled ? 'text-primary' : 'text-white'
-              }`}>
+              <h1 className={`text-xl font-heading font-bold transition-colors ${showSolidNav ? 'text-primary' : 'text-white'
+                }`}>
                 ARSITEKU
               </h1>
-              <p className={`text-xs transition-colors ${
-                isScrolled ? 'text-neutral-600' : 'text-white/80'
-              }`}>
+              <p className={`text-xs transition-colors ${showSolidNav ? 'text-neutral-600' : 'text-white/80'
+                }`}>
                 Studio Arsitektur
               </p>
             </div>
@@ -82,17 +68,15 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`font-body text-sm font-medium transition-colors relative group ${
-                  location.pathname === link.to
-                    ? isScrolled ? 'text-primary' : 'text-white'
-                    : isScrolled ? 'text-neutral-700 hover:text-primary' : 'text-white/90 hover:text-white'
-                }`}
+                className={`font-body text-sm font-medium transition-colors relative group ${location.pathname === link.to
+                  ? showSolidNav ? 'text-primary' : 'text-white'
+                  : showSolidNav ? 'text-neutral-700 hover:text-primary' : 'text-white/90 hover:text-white'
+                  }`}
               >
                 {link.label}
                 {location.pathname === link.to && (
-                  <div className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${
-                    isScrolled ? 'bg-primary' : 'bg-white'
-                  }`} />
+                  <div className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${showSolidNav ? 'bg-primary' : 'bg-white'
+                    }`} />
                 )}
               </Link>
             ))}
@@ -104,29 +88,21 @@ const Navbar: React.FC = () => {
               href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
-                isScrolled 
-                  ? 'text-primary hover:bg-primary/10' 
-                  : 'text-white hover:bg-white/10'
-              }`}
+              className={`flex items-center space-x-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${showSolidNav
+                ? 'bg-primary text-white hover:bg-primary/90'
+                : 'bg-white text-primary hover:bg-white/90'
+                }`}
             >
               <Phone className="w-4 h-4" />
-              <span>WhatsApp</span>
+              <span>Konsultasi via WhatsApp</span>
             </a>
-            <Link
-              to="/kontak"
-              className="bg-accent hover:bg-accent/90 text-white px-6 py-2 rounded-lg font-medium text-sm transition-colors"
-            >
-              Konsultasi Gratis
-            </Link>
           </div>
 
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 rounded-md transition-colors ${
-              isScrolled ? 'text-neutral-700' : 'text-white'
-            }`}
+            className={`lg:hidden p-2 rounded-md transition-colors ${showSolidNav ? 'text-neutral-700' : 'text-white'
+              }`}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -147,16 +123,15 @@ const Navbar: React.FC = () => {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`block py-2 font-body text-base transition-colors ${
-                    location.pathname === link.to
-                      ? 'text-primary font-medium'
-                      : 'text-neutral-700 hover:text-primary'
-                  }`}
+                  className={`block py-2 font-body text-base transition-colors ${location.pathname === link.to
+                    ? 'text-primary font-medium'
+                    : 'text-neutral-700 hover:text-primary'
+                    }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              
+
               <div className="pt-4 border-t border-neutral-200 space-y-3">
                 <a
                   href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
