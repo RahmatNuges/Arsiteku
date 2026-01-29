@@ -6,19 +6,19 @@ const teamMembers = [
     {
         name: "Ir. Adi Nugroho, IAI",
         role: "Principal Architect",
-        image: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: "/images/Tim/Ir. Adi Nugroho, IAI.png",
         bio: "Berpengalaman 12+ tahun dalam desain hunian tropis modern. Percaya bahwa rumah harus menjadi oase yang menenangkan bagi penghuninya."
     },
     {
         name: "Sarah Wijaya, S.Ars",
         role: "Senior Interior Designer",
-        image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: "/images/Tim/Sarah Wijaya, S.Ars.png",
         bio: "Spesialis dalam menciptakan ruang interior yang fungsional dengan sentuhan estetika 'warm minimalism'."
     },
     {
         name: "Budi Santoso, ST",
         role: "Project Manager",
-        image: "https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: "/images/Tim/Budi Santoso, ST.png",
         bio: "Memastikan setiap detail konstruksi tereksekusi dengan presisi dan proyek berjalan tepat waktu."
     }
 ];
